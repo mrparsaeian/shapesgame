@@ -15,7 +15,7 @@ const store = createStore(
 
 ReactDOM.render(
   // <React.StrictMode>
-    <FitToViewport width={650} height={650} minZoom={0} maxZoom={.7}  className="box">
+    <FitToViewport width={650} height={650} minZoom={0} maxZoom={.7}>
       <Provider store={store}>
   
       <App/>

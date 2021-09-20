@@ -10,19 +10,22 @@
     display: flex;
     -webkit-flex-flow: row;
     flex-flow: row;
-    justify-content:start;
+    justify-content:flex-start;
     line-height:30px;
+    background:grey;
 }
 
 .flex-item {
-    background: grey;
-    margin: 5px;
-    color: white;
+    background: rgb(164, 183, 184);
+    margin: 0px;
+    color: rgb(37, 37, 37);
     font-weight: bold;
     font-size: 1.5em;
     text-align: center;
     flex: 1 0 0px;
     min-width: 1.5em;
+    border-radius:0px;
+    border: 1px solid;
 }
 .flex-item:before {
     content: "";
@@ -31,4 +34,5 @@
     float: left;
     
 }
+
 

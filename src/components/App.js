@@ -6,7 +6,6 @@ import StreamDelete from './rotation/StreamDelete';
 import WaitingRoom from './rotation/WaitingRoom';
 import StreamShow from './rotation/StreamShow';
 import HomePage from './rotation/HomePage';
-import Header from './Header';
 import ShapesGameBoard from './shapesgame/ShapesGameBoard';
 
 import history from '../history';
@@ -16,7 +15,6 @@ const App = () => {
     <div className="ui container">
       <Router history={history}>
         <div>
-          {/* <Header /> */}
           <Route path="/" exact component={HomePage} />
           <Route path="/waitingroom" exact component={WaitingRoom} />
           <Route path="/shapesgameboard" exact component={ShapesGameBoard} />

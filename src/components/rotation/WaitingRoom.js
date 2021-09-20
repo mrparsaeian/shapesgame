@@ -1,28 +1,28 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchStreams } from "../../actions";
+import { fetchActiveUsersInMyRoom } from "../../actions";
 
-class StreamList extends React.Component {
+class MyWaitingRoom extends React.Component {
   componentDidMount() {
-    this.props.fetchStreams();
+    this.props.fetchActiveUsersInMyRoom();
   }
 
-  renderAdmin(stream) {
-    if (stream.userId === this.props.currentUserId) {
+  renderAdmin(userInMyRoom) {
+    if (userInMyRoom.userId === this.props.currentUserId) {
       return <i className="large middle aligned icon user green" />;
     }
     return <i className="large middle aligned icon user blue" />;
   }
 
   renderList() {
-    return this.props.streams.map((stream) => {
+    return this.props.activeUsersInMyRoom.map((userInMyRoom) => {
       return (
-        <div className="item" key={stream.id}>
-          {this.renderAdmin(stream)}
+        <div className="item" key={userInMyRoom.id}>
+          {this.renderAdmin(userInMyRoom)}
           <div className="content">
-            {stream.id}
-            <div className="description">{stream.email}</div>
+            {userInMyRoom.id}
+            <div className="description">{userInMyRoom.email}</div>
           </div>
         </div>
       );
@@ -54,10 +54,10 @@ class StreamList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    streams: Object.values(state.streams),
+    activeUsersInMyRoom: Object.values(state.activeUsersInMyRoom),
     currentUserId: state.auth.userId,
     isSignedIn: state.auth.isSignedIn,
   };
 };
 
-export default connect(mapStateToProps, { fetchStreams })(StreamList);
+export default connect(mapStateToProps, { fetchActiveUsersInMyRoom })(MyWaitingRoom);

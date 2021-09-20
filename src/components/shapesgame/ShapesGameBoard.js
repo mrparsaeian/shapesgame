@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchStreams } from "../../actions";
+import { fetchActiveUsersInMySession } from "../../actions";
 import history from "../../history";
+import Header from '../Header';
 import { Label, Icon } from "semantic-ui-react";
 import UserCard from "./UserCard";
 import "./GameBoard.css";
@@ -11,10 +12,9 @@ class ShapesGameBoard extends React.Component {
   constructor(props) {
     super(props);
 
-    this.props.fetchStreams();
+    this.props.fetchActiveUsersInMySession();
   }
   componentDidMount() {
-    console.log("renderes!");
   }
   renderMyUser(stream) {
     if (stream.userId === this.props.currentUserId) {
@@ -24,7 +24,7 @@ class ShapesGameBoard extends React.Component {
   }
 
   renderUserGrid() {
-    return this.props.streams.map((stream) => {
+    return this.props.activeUsersInMySession.map((stream) => {
       return (
         <a id={stream.id} className="ShapesGameBoard.flex-item">
           <Icon name="flag checkered red" inverted />
@@ -40,7 +40,7 @@ class ShapesGameBoard extends React.Component {
     });
   }
   renderUserGrid2() {
-    return this.props.streams.map((stream) => {
+    return this.props.activeUsersInMySession.map((stream) => {
       return (
         <a id={stream.id} className="ShapesGameBoard.flex-item">
           <Icon name="flag checkered red" inverted />
@@ -58,38 +58,39 @@ class ShapesGameBoard extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="boxofgame">          <Header />
+
         <div className="flex-container">
           <div className="flex-item">
-            1<UserCard />
+            <UserCard cardnumber="1" userid={[...this.props.activeUsersInMySession][1]} />
           </div>
           <div className="flex-item">
-            2<UserCard />
+            <UserCard />
           </div>
           <div className="flex-item">
-            3<UserCard />
+            <UserCard />
           </div>
         </div>
         <div className="flex-container">
           <div className="flex-item">
-            4<UserCard />
+            <UserCard />
           </div>
           <div className="flex-item">
-            5<UserCard />
+            <UserCard />
           </div>
           <div className="flex-item">
-            6<UserCard />
+            <UserCard />
           </div>
         </div>
         <div className="flex-container">
           <div className="flex-item">
-            7<UserCard />
+            <UserCard className="flex-item"/>
           </div>
           <div className="flex-item">
-            8<UserCard />
+            <UserCard />
           </div>
           <div className="flex-item">
-            9<UserCard />
+            <UserCard />
           </div>
         </div>
       </div>
@@ -110,10 +111,10 @@ class ShapesGameBoard extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    streams: Object.values(state.streams),
+    activeUsersInMySession: Object.values(state.activeUsersInMySession),
     currentUserId: state.auth.userId,
     isSignedIn: state.auth.isSignedIn,
   };
 };
 
-export default connect(mapStateToProps, { fetchStreams })(ShapesGameBoard);
+export default connect(mapStateToProps, { fetchActiveUsersInMySession })(ShapesGameBoard);
