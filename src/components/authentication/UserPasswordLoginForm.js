@@ -1,10 +1,7 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import GoogleAuth from "../GoogleAuth";
-
 var password = "p@ssword";
 var email = "test@test.com";
-
 class StartForm extends React.Component {
   renderError({ error, touched }) {
     if (touched && error) {
@@ -15,7 +12,6 @@ class StartForm extends React.Component {
       );
     }
   }
-
   renderInput = ({ input, label, meta }) => {
     const className = `field ${meta.error && meta.touched ? "error" : ""}`;
     return (
@@ -26,7 +22,6 @@ class StartForm extends React.Component {
       </div>
     );
   };
-
   onSubmit = (formValues) => {
     this.props.onSubmit({ password, email, ...formValues });
   };
@@ -37,60 +32,41 @@ class StartForm extends React.Component {
         onSubmit={this.props.handleSubmit(this.onSubmit)}
         className="ui form error"
       >
-        <div className="ui placeholder segment">
-          <div className="ui two stackable cards ">
-            <div className="card">
-              <div className="ui form">
-                <div className="field">
-                  <div className="ui left icon input">
-                    <Field
-                      name="username"
-                      component={this.renderInput}
-                      label="Username"
-                    />
-                    {/* <i className="user icon"></i> */}
-                  </div>
-                </div>
-                <div className="field">
-                  <div className="ui left icon input">
-                    <Field
-                      name="password"
-                      component={this.renderInput}
-                      label="Password"
-                    ></Field>
-                    {/* <i className="lock icon"></i> */}
-                  </div>
-                </div>
-                <button className="ui button primary">Login</button>
-              </div>
-            </div>
-            <div className="middle aligned card">
-              <div className="ui form">
-                <GoogleAuth />
-              </div>
+        <div className="ui form">
+          <div className="field">
+            <div className="ui left icon input">
+              <Field
+                name="username"
+                component={this.renderInput}
+                label="Username"
+              />
             </div>
           </div>
-          {/* <div class="ui hidden vertical divider">Or</div> */}
+          <div className="field">
+            <div className="ui left icon input">
+              <Field
+                name="password"
+                component={this.renderInput}
+                label="Password"
+              ></Field>
+            </div>
+          </div>
+          <button className="ui button primary">Login</button>
         </div>
       </form>
     );
   }
 }
-
 const validate = (formValues) => {
   const errors = {};
-
   if (!formValues.title) {
     errors.title = "You must enter a title";
   }
-
   if (!formValues.description) {
     errors.description = "You must enter a description";
   }
-
   return errors;
 };
-
 export default reduxForm({
   form: "StartForm",
   validate,

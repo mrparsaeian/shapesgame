@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updateTimer } from "../../actions";
+import { updateTimerActionCreator } from "../../actions";
 class Timer extends React.Component {
   constructor(props) {
     super(props);
@@ -13,35 +13,31 @@ class Timer extends React.Component {
 
   // Wait until the component has mounted to start the animation frame
   componentDidMount() {
-    if (this.timer === 0 && this.props.currentTimerTime > 0) {
+    if (this.timer == 0 && this.props.currentTimerTime > 0) {
       this.timer = setInterval(this.countDown, 1000);
     }
-    let timeLeftVar = this.props.currentTimerTime;
-    updateTimer(20);
   }
 
   // Clean up by cancelling any animation frame previously scheduled
-  componentWillUnmount() {}
   countDown() {
     // Remove one second, set state so a re-render happens.
-    let seconds = this.props.currentTimerTime - 1;
- 
+    this.props.updateTimerActionCreator(this.props.currentTimerTime - 1);
+    console.log(this.props.currentTimerTime);
     // Check if we're at zero.
-    if (seconds == 0) {
+    if (this.props.currentTimerTime == 0) {
       clearInterval(this.timer);
     }
   }
-  
-
 
   render() {
-    return <div className="ui header box">Time left: {this.timeLeftVar}</div>;
+    return (
+      <div className="ui header box">
+        Time left: {this.props.currentTimerTime}
+      </div>
+    );
   }
 }
 const mapStateToProps = (state) => {
-    return{
-   currentUserId: state.auth.userId,
-   isSignedIn: state.auth.isSignedIn,
-   currentTimerTime: state.currentTimerTime};
+  return { currentTimerTime: state.currentTimer.currentTimerTime };
 };
-export default connect(mapStateToProps, { updateTimer })(Timer);
+export default connect(mapStateToProps, { updateTimerActionCreator })(Timer);

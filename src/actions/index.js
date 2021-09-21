@@ -33,10 +33,13 @@ import {
 //   dispatch({ type: UPDATE_TIMER, payload: myTimerTime });
 // };
 
-export const updateTimer = (myTimerTime) => {
+export const updateTimerActionCreator = (timerTime) => {
+  console.log("timer acted");
+  console.log(timerTime);
+
   return {
     type: UPDATE_TIMER,
-    payload: myTimerTime,
+    payload: timerTime,
   };
 };
 export const fetchActiveUsersInMySession = () => async (dispatch) => {

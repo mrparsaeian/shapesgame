@@ -14,5 +14,5 @@ export default combineReducers({
   activeUsersInMyRoom: myRoom,
   activeUsersInMySession: mySessionReducer,
   myRoom: myRoom,
-  currentTimerTime: timerReducer
+  currentTimer: timerReducer
 });
