@@ -4,7 +4,6 @@ import {
   SIGN_IN,
   SIGN_OUT,
   CREATE_STREAM,
-  FETCH_STREAMS,
   FETCH_STREAM,
   DELETE_STREAM,
   EDIT_STREAM,
@@ -16,32 +15,33 @@ import {
   INITIATE_SHAPEGAME,
   FETCH_ACTIVE_USERS_IN_MY_SESSION,
   UPDATE_TIMER,
+  TIMEOUT_TIMER_GOLBAL_FUNCTION,
+  UPDATE_IS_SESSION_FINISHED
 } from "./types";
-
-// export const updateTimer = (myTimerTime) => async (dispatch, getState) => {
-//   console.log("start timer!")
-//   console.log("going to update timer!");
-//   const { userId } = getState().auth;
-//   const usersessiontimertime = {
-//     ...userId,
-//     ...myTimerTime,
-//   };
-//   const response = await AxioConnection.post(
-//     "/usersessiontimertimes",
-//     usersessiontimertime
-//   );
-//   dispatch({ type: UPDATE_TIMER, payload: myTimerTime });
-// };
-
-export const updateTimerActionCreator = (timerTime) => {
-  console.log("timer acted");
-  console.log(timerTime);
-
-  return {
-    type: UPDATE_TIMER,
-    payload: timerTime,
+const sesseionId = "3f34fHU";
+export const timedoutTimerGlobalFunctionActionCreator =
+  (timerTime) => async (dispatch, getState) => {
+    const { sessionIsFinished } = getState().currentTimer;
+    sessionIsFinished = true;
+    await AxioConnection.patch(`/usersessiontimertimes/${sesseionId}`, {
+      sessionIsFinished,
+    });
+    dispatch({ type: UPDATE_IS_SESSION_FINISHED, payload: sessionIsFinished });
   };
-};
+export const updateTimerActionCreator =
+  (timerTime) => async (dispatch, getState) => {
+    await AxioConnection.patch(`/usersessiontimertimes/${sesseionId}`, {
+      timerTime,
+    });
+    dispatch({ type: UPDATE_TIMER, payload: timerTime });
+  };
+
+// export const updateTimerActionCreator = (timerTime) => {
+//   return {
+//     type: UPDATE_TIMER,
+//     payload: timerTime,
+//   };
+// };
 export const fetchActiveUsersInMySession = () => async (dispatch) => {
   const response = await AxioConnection.get("/activesession");
   dispatch({ type: FETCH_ACTIVE_USERS_IN_MY_SESSION, payload: response.data });
@@ -68,15 +68,10 @@ export const fetchActiveUsersInMyRoom = () => async (dispatch) => {
   // .catch(function (error) {
   //   if (error.response) {
   //     // Request made and server responded
-  //     console.log(error.response.data);
-  //     console.log(error.response.status);
-  //     console.log(error.response.headers);
   //   } else if (error.request) {
   //     // The request was made but no response was received
-  //     console.log(error.request);
   //   } else {
   //     // Something happened in setting up the request that triggered an Error
-  //     console.log("Error", error.message);
   //   }
   // });
   // ^ https://www.py4u.net/discuss/337219 for loading/spinner effect
@@ -89,9 +84,9 @@ export const fetchMyRoom = () => async (dispatch) => {
 
   dispatch({ type: FETCH_MYROOM, payload: response.data });
 };
-export const updateUsersInMyRoom = (myRoom) => async (dispatch) => {
-  const response = await AxioConnection.patch(`/rooms/${myRoom.id}`);
 
+export const updateUsersInMyRoom = (myRoom) => async (dispatch) => {
+  await AxioConnection.patch(`/rooms/${myRoom.id}`);
   dispatch({ type: UPDATE_USERS_IN_MYROOM, payload: myRoom });
 };
 
@@ -101,7 +96,7 @@ export const addMeToMyRoom = (myRoomData) => async (dispatch, getState) => {
   myRoomData.roommembersno += 1;
   myRoomData.members = [...myRoomData.members, myUserId];
 
-  const response = await AxioConnection.patch(`/liverooms/${myRoomData.Id}/`, {
+  await AxioConnection.patch(`/liverooms/${myRoomData.Id}/`, {
     myRoomData,
   });
 
@@ -122,7 +117,6 @@ export const createUser = (userData) => async (dispatch, getState) => {
     ...userData,
     userId,
   });
-  console.log(response.accessToken);
   dispatch({ type: CREATE_USER, payload: userData });
 };
 

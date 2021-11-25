@@ -1,30 +1,22 @@
 import React from "react";
-import ReactCardFlip from "react-card-flip";
 import { connect } from "react-redux";
 import { fetchActiveUsersInMySession } from "../../actions";
 import "./UserCard.css";
 class UserCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isFlipped: false,
-    };
-    this.handleClick = this.handleClick.bind(this);
     this.props.fetchActiveUsersInMySession();
   }
-  componentDidMount() {}
-  handleClick(e) {
-    e.preventDefault();
-    this.setState((prevState) => ({ isFlipped: !prevState.isFlipped }));
+  componentDidMount() {
   }
 
   render() {
     return (
       <div>
         <div className="usercardfrontcontainer">
-          <div className="mynumber">{/* {this.props.userid} */}</div>
+          <div className="mynumber">{this.props.activeUsersInMySession[this.props.cardIdIteration]}</div>
 
-          <div className="user1">1 </div>
+          <div className="user1">4 </div>
 
           <div className="user2">2 </div>
 
@@ -53,7 +45,6 @@ class UserCard extends React.Component {
 const mapStateToProps = (state) => {
   return {
     activeUsersInMySession: Object.values(state.activeUsersInMySession),
-
     currentUserId: state.auth.userId,
     isSignedIn: state.auth.isSignedIn,
   };

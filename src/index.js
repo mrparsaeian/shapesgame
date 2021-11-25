@@ -7,6 +7,7 @@ import {FitToViewport} from "react-fit-to-viewport";
 import App from "./components/App";
 import reducers from "./reducers";
 
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   reducers,
@@ -15,7 +16,7 @@ const store = createStore(
 
 ReactDOM.render(
   // <React.StrictMode>
-    <FitToViewport width={650} height={650} minZoom={0} maxZoom={.7}>
+    <FitToViewport width={670} height={670} minZoom={0} maxZoom={.7}>
       <Provider store={store}>
   
       <App/>

@@ -1,9 +1,11 @@
 import React from "react";
-import Timer from "./timer/timer";
+import Timer from "./timer/Timer";
+import "./Header.css";
+// import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
-    <div className="ui secondary menu">
+    <div className="title">
       <Timer />
     </div>
   );

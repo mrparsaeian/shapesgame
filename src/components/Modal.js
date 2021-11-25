@@ -1,6 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import history from "../history";
 
+const renderStartMapGame = () => {
+  return (
+    // <div style={{ textAlign: "right" }}>
+    <button
+      onClick={() => history.push("/shapesgameboardmap")}
+      className="ui button primary"
+    >
+      Start Map Game
+    </button>
+    // </div>
+  );
+};
 const Modal = props => {
   return ReactDOM.createPortal(
     <div onClick={props.onDismiss} className="ui dimmer modals visible active">

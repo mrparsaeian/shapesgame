@@ -48,7 +48,7 @@
   /* align-self: center;  */
   /* font-size: 20pt; */
   forced-color-adjust: initial;
-  background-color: blue;
+  background-color:tomato;
   place-items: center;
   margin: 0;
   border-radius: 3px;
@@ -60,7 +60,7 @@
   /* align-self: center;  */
   /* font-size: 20pt; */
   forced-color-adjust: initial;
-  background-color: green;
+  background-color:steelblue;
   place-items: center;
   margin: 0;
   border-radius: 3px;
@@ -72,7 +72,7 @@
   /* align-self: center;  */
   /* font-size: 20pt; */
   forced-color-adjust: initial;
-  background-color: red;
+  background-color:palegreen;
   place-items: center;
   margin: 0;
   border-radius: 3px;
@@ -84,7 +84,7 @@
   /* align-self: center;  */
   /* font-size: 20pt; */
   forced-color-adjust: initial;
-  background-color: green;
+  background-color: palegreen;
   place-items: center;
   margin: 0;
   border-radius: 3px;
@@ -96,7 +96,7 @@
   /* align-self: center;  */
   /* font-size: 20pt; */
   forced-color-adjust: initial;
-  background-color: blue;
+  background-color: palegreen;
   place-items: center;
   margin: 0;
   border-radius: 3px;
@@ -108,7 +108,7 @@
   /* align-self: center;  */
   /* font-size: 20pt; */
   forced-color-adjust: initial;
-  background-color: red;
+  /* background-color: tomato; */
   place-items: center;
   margin: 0;
   border-radius: 3px;
@@ -120,7 +120,7 @@
   /* align-self: center;  */
   /* font-size: 20pt; */
   forced-color-adjust: initial;
-  background-color: green;
+  background-color: palegreen;
   place-items: center;
   margin: 0;
   border-radius: 3px;
@@ -130,7 +130,7 @@
   /* align-self: center;  */
   /* font-size: 20pt; */
   forced-color-adjust: initial;
-  background-color: blue;
+  background-color: steelblue;
   place-items: center;
   margin: 0;
   border-radius: 3px;

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { signIn, signOut } from "../../actions";
 import { Link } from "react-router-dom";
 import UserPasswordLoginForm from "./UserPasswordLoginForm";
+import "./Authentication.css";
 class Authentication extends React.Component {
   componentDidMount() {
     window.gapi.load("client:auth2", () => {
