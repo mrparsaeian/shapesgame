@@ -11,8 +11,9 @@ class Authentication extends React.Component {
         .init({
           clientId:
             // '797401886567-9cumct9mrt3v2va409rasa7fa6fq02hh.apps.googleusercontent.com',
-            "193426547449-0b876ea8btalp2uj4mc88sovse2c931q.apps.googleusercontent.com",
+	    // "193426547449-0b876ea8btalp2uj4mc88sovse2c931q.apps.googleusercontent.com", //last client
             // "193426547449-jp277e3qv06paakrr6f866v8v25uu7aa.apps.googleusercontent.com",
+	    "193426547449-f3uqbfv6q068cpdfvv218uv8o76tog5b.apps.googleusercontent.com",
           scope: "email",
         })
         .then(() => {
